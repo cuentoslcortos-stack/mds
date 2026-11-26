@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* Tokens semánticos: la app nunca usa la URL del backend hardcodeada y los
+   colores se resuelven por variable para que el tema oscuro sea un flip limpio. */
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+
+  --color-app-bg: var(--app-bg);
+  --color-app-surface: var(--app-surface);
+  --color-app-raised: var(--app-raised);
+  --color-app-border: var(--app-border);
+  --color-app-fg: var(--app-fg);
+  --color-app-muted: var(--app-muted);
+  --color-app-accent: var(--app-accent);
+  --color-app-accent-soft: var(--app-accent-soft);
+  --color-app-danger: var(--app-danger);
+  --color-app-ok: var(--app-ok);
+}
+
+:root {
+  color-scheme: light;
+  --app-bg: #f7f5f0;
+  --app-surface: #ffffff;
+  --app-raised: #f1eee6;
+  --app-border: #ded8cb;
+  --app-fg: #1f1d19;
+  --app-muted: #6b6558;
+  --app-accent: #8a2f1f;
+  --app-accent-soft: #f6e5df;
+  --app-danger: #a12d1f;
+  --app-ok: #2f6b46;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --app-bg: #14130f;
+  --app-surface: #1d1c17;
+  --app-raised: #27251e;
+  --app-border: #3a372d;
+  --app-fg: #ece7db;
+  --app-muted: #a79f8e;
+  --app-accent: #e08a70;
+  --app-accent-soft: #3b2620;
+  --app-danger: #f2937c;
+  --app-ok: #83cb9e;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--app-bg);
+    color: var(--app-fg);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--app-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--app-accent-soft);
+  }
+}
+
+@layer utilities {
+  .cursor-parpadeo {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.15em;
+    vertical-align: -0.15em;
+    background-color: var(--app-accent);
+    animation: parpadeo 1.1s steps(2, start) infinite;
+  }
+
+  @keyframes parpadeo {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-parpadeo {
+      animation: none;
+    }
+  }
+}
